@@ -20,9 +20,26 @@ let student2: Student = {
 };
 
 let studentsList: Student[] = [student1, student2];
-let arr: [string, string][] = [];
-arr.push([student1.firstName, student1.location]);
-// arr.push([student2.firstName, student2.location]);
-console.log(studentsList[0].firstName + " " + studentsList[0].location);
-console.log(studentsList[1].firstName + " " + studentsList[1].location);
-console.log(arr);
+
+const table: HTMLTableElement = document.createElement("table");
+table.border = "1";
+
+const thead: HTMLTableSectionElement = table.createTHead();
+const headerRow: HTMLTableRowElement = thead.insertRow();
+const headercell1: HTMLTableCellElement = headerRow.insertCell();
+headercell1.textContent = "First Name";
+
+const headercell2: HTMLTableCellElement = headerRow.insertCell();
+headercell2.textContent = "Location";
+
+const tbody: HTMLTableSectionElement = table.createTBody();
+
+studentsList.forEach((student) => {
+    const row: HTMLTableRowElement = tbody.insertRow();
+    const firstcell: HTMLTableCellElement = row.insertCell();
+    firstcell.textContent = student.firstName;
+    const secondcell: HTMLTableCellElement = row.insertCell();
+    secondcell.textContent = student.location;
+});
+
+document.body.appendChild(table);
