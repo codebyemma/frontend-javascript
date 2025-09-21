@@ -1,15 +1,21 @@
-interface Teacher {
-    exeperienceTeachingC?: number;
-}
+/// <reference path="./Subject.ts" />
 
-class Cpp extends Subject {
-   getRequirements(): string {
-    return "Here is the list of requirements for Cpp";
-   } 
-   getAvailableTeacher(teacher: Teacher): string {
-    if (teacher.exeperienceTeachingC === undefined) {
-            return "No available teacher";
-        }
-        return `Available Teacher: ${teacher.firstName}`;
-   }
+namespace Subjects {
+  // Declaration merging: extend Teacher with experienceTeachingC
+  export interface Teacher {
+    experienceTeachingC?: number;
+  }
+
+  export class Cpp extends Subject {
+    getRequirements(): string {
+      return "Here is the list of requirements for Cpp";
+    }
+
+    getAvailableTeacher(): string {
+      if (!this.teacher.experienceTeachingC || this.teacher.experienceTeachingC <= 0) {
+        return "No available teacher";
+      }
+      return `Available Teacher: ${this.teacher.firstName}`;
+    }
+  }
 }
